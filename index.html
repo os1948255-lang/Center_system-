@@ -41,7 +41,7 @@
     --radius-sm:10px;
   }
   *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;width:100%;}
+  html,body{margin:0;padding:0;width:100%;overflow-x:hidden;}
   body{
     background:var(--bg);
     font-family:'Cairo',sans-serif;
@@ -49,81 +49,87 @@
     min-height:100vh;
   }
   
-  /* الشريط العلوي بعرض الشاشة بالكامل وبدون فراغات */
+  /* الشريط العلوي البنفسجي العريض الممتد 100% بعرض الشاشة */
   header.topbar{
     background:linear-gradient(120deg,var(--indigo) 0%,var(--purple) 100%);
     color:#fff;
-    padding:26px 40px;
+    padding:35px 50px;
     display:flex;
     align-items:center;
     justify-content:space-between;
     flex-wrap:wrap;
-    gap:14px;
-    width:100%;
-    box-shadow:0 8px 24px rgba(79,70,229,.18);
+    gap:20px;
+    width:100vw;
+    position:relative;
+    left:50%;
+    right:50%;
+    margin-left:-50vw;
+    margin-right:-50vw;
+    box-shadow:0 10px 30px rgba(79,70,229,.22);
+    margin-bottom:35px;
   }
-  header.topbar .brand{display:flex;align-items:center;gap:15px;}
+  header.topbar .brand{display:flex;align-items:center;gap:18px;}
   header.topbar .brand .mark{
-    width:46px;height:46px;border-radius:14px;
-    background:rgba(255,255,255,.16);
+    width:55px;height:55px;border-radius:16px;
+    background:rgba(255,255,255,.18);
     display:flex;align-items:center;justify-content:center;
-    font-weight:800;font-size:20px;
+    font-weight:900;font-size:24px;
   }
-  header.topbar h1{font-size:22px;font-weight:800;margin:0;}
-  header.topbar p{margin:3px 0 0;font-size:13px;color:rgba(255,255,255,.78);font-weight:500;}
+  header.topbar h1{font-size:26px;font-weight:900;margin:0;}
+  header.topbar p{margin:5px 0 0;font-size:14px;color:rgba(255,255,255,.82);font-weight:600;}
   header.topbar .conn-status{
-    font-size:13px;font-weight:600;padding:8px 16px;border-radius:30px;
-    background:rgba(255,255,255,.14);display:flex;align-items:center;gap:8px;
+    font-size:13.5px;font-weight:700;padding:10px 20px;border-radius:35px;
+    background:rgba(255,255,255,.16);display:flex;align-items:center;gap:10px;
   }
-  header.topbar .dot{width:8px;height:8px;border-radius:50%;background:#cbd5e1;}
+  header.topbar .dot{width:9px;height:9px;border-radius:50%;background:#cbd5e1;}
   header.topbar .dot.on{background:#34d399;}
   header.topbar .dot.off{background:#fca5a5;}
 
-  /* المحتوى الرئيسي بعرض كامل ومريح */
+  /* حاوية المحتوى الرئيسي ممتدة ومريحة جداً */
   main{
     width:100%;
-    max-width:100%;
-    margin:0;
-    padding:30px 40px 70px;
+    max-width:1450px;
+    margin:0 auto;
+    padding:0 25px 70px;
   }
 
-  /* بطاقات الإحصائيات ممتدة بكامل العرض */
+  /* بطاقات الإحصائيات ممتدة بكامل العرض وبشكل عريض */
   .stats{
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
-    gap:20px;
-    margin-bottom:28px;
+    grid-template-columns:repeat(auto-fit, minmax(380px, 1fr));
+    gap:24px;
+    margin-bottom:32px;
     width:100%;
   }
   .stat-card{
     background:var(--card);
     border-radius:var(--radius-lg);
-    padding:24px 30px;
+    padding:28px 35px;
     border:1px solid var(--border-soft);
-    box-shadow:var(--shadow-sm);
+    box-shadow:var(--shadow-md);
     display:flex;
     align-items:center;
-    gap:20px;
+    gap:24px;
     width:100%;
   }
   .stat-card .icon{
-    width:65px;height:65px;border-radius:18px;
+    width:75px;height:75px;border-radius:20px;
     display:flex;align-items:center;justify-content:center;
-    font-size:30px;flex-shrink:0;
+    font-size:34px;flex-shrink:0;
   }
   .stat-card.students .icon{background:var(--indigo-bg);color:var(--indigo);}
   .stat-card.revenue .icon{background:var(--emerald-bg);color:var(--emerald-dark);}
-  .stat-card .num{font-size:36px;font-weight:800;line-height:1.1;}
-  .stat-card .label{font-size:14px;color:var(--muted);font-weight:600;margin-top:4px;}
+  .stat-card .num{font-size:42px;font-weight:900;line-height:1.1;}
+  .stat-card .label{font-size:15px;color:var(--muted);font-weight:700;margin-top:6px;}
 
   .grid{
     display:grid;
-    grid-template-columns:440px 1fr;
-    gap:24px;
+    grid-template-columns:460px 1fr;
+    gap:25px;
     align-items:start;
     width:100%;
   }
-  @media (max-width:1100px){
+  @media (max-width:1150px){
     .grid{grid-template-columns:1fr;}
   }
 
@@ -132,125 +138,125 @@
     border-radius:var(--radius-lg);
     border:1px solid var(--border-soft);
     box-shadow:var(--shadow-sm);
-    padding:26px;
-    margin-bottom:24px;
+    padding:28px;
+    margin-bottom:25px;
   }
   .panel h2{
-    font-size:16.5px;font-weight:800;margin:0 0 6px;
-    display:flex;align-items:center;gap:9px;
+    font-size:17.5px;font-weight:900;margin:0 0 6px;
+    display:flex;align-items:center;gap:10px;
   }
   .panel h2 .h-icon{
-    width:34px;height:34px;border-radius:10px;
+    width:36px;height:36px;border-radius:10px;
     background:var(--indigo-bg);color:var(--indigo);
-    display:flex;align-items:center;justify-content:center;font-size:16px;
+    display:flex;align-items:center;justify-content:center;font-size:17px;
   }
-  .panel .sub{font-size:12.5px;color:var(--muted);margin:0 0 20px;line-height:1.6;}
+  .panel .sub{font-size:13px;color:var(--muted);margin:0 0 20px;line-height:1.6;}
 
   input,select{
     font-family:'Cairo',sans-serif;
     border:1.5px solid var(--border);
     border-radius:var(--radius-sm);
-    padding:12px 14px;
-    font-size:14px;
-    font-weight:500;
+    padding:13px 15px;
+    font-size:14.5px;
+    font-weight:600;
     width:100%;
     background:#fbfcfe;
     color:var(--text);
   }
   input:focus,select:focus{outline:none;border-color:var(--indigo);background:#fff;}
-  input[readonly]{background:var(--indigo-bg);color:var(--indigo-dark);font-weight:800;border-style:dashed;}
+  input[readonly]{background:var(--indigo-bg);color:var(--indigo-dark);font-weight:900;border-style:dashed;}
   
-  .scan-input-wrap input{font-size:16px;letter-spacing:1.5px;font-weight:700;}
-  #scanAlert{margin-top:14px;padding:14px 16px;border-radius:var(--radius-sm);font-size:13.5px;font-weight:700;display:none;}
+  .scan-input-wrap input{font-size:17px;letter-spacing:1.5px;font-weight:800;}
+  #scanAlert{margin-top:14px;padding:14px 16px;border-radius:var(--radius-sm);font-size:14px;font-weight:800;display:none;}
   #scanAlert.show{display:block;}
   #scanAlert.danger{background:var(--red-bg);color:var(--red);border:1px solid #fecaca;}
   #scanAlert.success{background:var(--emerald-bg);color:var(--emerald-dark);border:1px solid #a7f3d0;}
 
-  .field{margin-bottom:16px;}
-  .field label{display:block;font-size:12.5px;font-weight:700;color:var(--muted);margin-bottom:7px;}
+  .field{margin-bottom:18px;}
+  .field label{display:block;font-size:13px;font-weight:800;color:var(--muted);margin-bottom:8px;}
   .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 
   .weekday-chips{display:flex;flex-wrap:wrap;gap:8px;}
   .weekday-chips .chip{
     display:flex;align-items:center;gap:6px;background:#f1f5f9;
-    border:1.5px solid var(--border);border-radius:30px;padding:8px 14px;
-    font-size:12.5px;font-weight:700;color:var(--muted);cursor:pointer;
+    border:1.5px solid var(--border);border-radius:30px;padding:9px 15px;
+    font-size:13px;font-weight:800;color:var(--muted);cursor:pointer;
   }
   .weekday-chips .chip input{display:none;}
   .weekday-chips .chip.active{background:linear-gradient(120deg,var(--indigo),var(--purple));border-color:transparent;color:#fff;}
 
   .btn{
     font-family:'Cairo',sans-serif;border:none;border-radius:var(--radius-sm);
-    padding:12px 18px;font-size:14px;font-weight:700;cursor:pointer;
-    display:inline-flex;align-items:center;justify-content:center;gap:7px;
+    padding:13px 20px;font-size:15px;font-weight:800;cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
   }
   .btn-primary{background:linear-gradient(120deg,var(--indigo),var(--purple));color:#fff;}
-  .btn-block{width:100%;margin-top:10px;}
+  .btn-block{width:100%;margin-top:12px;}
   .btn-ghost{background:#f1f5f9;color:var(--text);}
-  .btn-sm{padding:7px 10px;font-size:12px;border-radius:8px;}
+  .btn-sm{padding:8px 12px;font-size:12.5px;border-radius:8px;}
   .btn-whatsapp{background:#25D366;color:#fff;}
   .btn-print{background:var(--text);color:#fff;}
   .btn-edit{background:var(--indigo-bg);color:var(--indigo-dark);}
   .btn-delete{background:var(--red-bg);color:var(--red);}
 
-  #regMsg{margin-top:14px;font-size:13px;font-weight:700;display:none;padding:12px 14px;border-radius:var(--radius-sm);}
+  #regMsg{margin-top:14px;font-size:13.5px;font-weight:800;display:none;padding:12px 14px;border-radius:var(--radius-sm);}
   #regMsg.show{display:block;}
   #regMsg.success{background:var(--emerald-bg);color:var(--emerald-dark);}
   #regMsg.danger{background:var(--red-bg);color:var(--red);}
 
   .table-panel{
     background:var(--card);border-radius:var(--radius-lg);
-    border:1px solid var(--border-soft);box-shadow:var(--shadow-sm);padding:26px;
+    border:1px solid var(--border-soft);box-shadow:var(--shadow-sm);padding:28px;
     width:100%;
   }
   .table-panel .head-row{
-    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:20px;
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;margin-bottom:22px;
   }
-  .table-panel .head-row h2{margin:0;font-size:16.5px;font-weight:800;display:flex;align-items:center;gap:9px;}
+  .table-panel .head-row h2{margin:0;font-size:17.5px;font-weight:900;display:flex;align-items:center;gap:10px;}
   
   .filters-bar{display:flex;gap:12px;flex-wrap:wrap;}
-  .filters-bar select, .filters-bar input{width:auto;min-width:180px;}
+  .filters-bar select, .filters-bar input{width:auto;min-width:200px;}
 
   .table-scroll{overflow-x:auto;border-radius:var(--radius-sm);border:1px solid var(--border-soft);}
-  table{width:100%;border-collapse:collapse;min-width:1150px;font-size:13.5px;}
-  thead th{background:#f8fafc;color:var(--muted);font-weight:800;text-align:right;padding:16px 14px;border-bottom:1px solid var(--border-soft);white-space:nowrap;}
-  tbody td{padding:14px;border-bottom:1px solid var(--border-soft);vertical-align:middle;white-space:nowrap;}
+  table{width:100%;border-collapse:collapse;min-width:1150px;font-size:14px;}
+  thead th{background:#f8fafc;color:var(--muted);font-weight:900;text-align:right;padding:18px 16px;border-bottom:1px solid var(--border-soft);white-space:nowrap;}
+  tbody td{padding:16px;border-bottom:1px solid var(--border-soft);vertical-align:middle;white-space:nowrap;}
   tbody tr:hover{background:#f8fafc;}
-  .cell-input{width:65px;padding:6px;font-size:13px;border-radius:8px;}
-  .code-pill{background:var(--indigo-bg);padding:5px 12px;border-radius:8px;font-size:12px;font-weight:800;color:var(--indigo-dark);}
-  .fee-btn{border:none;border-radius:9px;padding:7px 13px;font-size:12.5px;font-weight:800;cursor:pointer;}
+  .cell-input{width:70px;padding:7px;font-size:13.5px;border-radius:8px;}
+  .code-pill{background:var(--indigo-bg);padding:6px 14px;border-radius:8px;font-size:13px;font-weight:900;color:var(--indigo-dark);}
+  .fee-btn{border:none;border-radius:9px;padding:8px 14px;font-size:13px;font-weight:900;cursor:pointer;}
   .fee-btn.paid{background:var(--emerald-bg);color:var(--emerald-dark);}
   .fee-btn.unpaid{background:var(--red-bg);color:var(--red);}
   .row-actions{display:flex;gap:6px;}
-  .empty-row td{text-align:center;color:var(--muted);padding:40px;font-weight:600;}
-  footer{text-align:center;color:var(--muted-2);font-size:12.5px;padding:28px;font-weight:600;width:100%;}
+  .empty-row td{text-align:center;color:var(--muted);padding:45px;font-weight:700;}
+  footer{text-align:center;color:var(--muted-2);font-size:13px;padding:32px;font-weight:700;width:100%;}
 
   .modal-overlay{
-    position:fixed;inset:0;background:rgba(15,23,42,.55);display:none;
-    align-items:flex-start;justify-content:center;padding:46px 16px;z-index:999;overflow-y:auto;
+    position:fixed;inset:0;background:rgba(15,23,42,.6);display:none;
+    align-items:flex-start;justify-content:center;padding:50px 16px;z-index:999;overflow-y:auto;
   }
   .modal-overlay.show{display:flex;}
-  .modal-box{background:#fff;border-radius:22px;width:100%;max-width:500px;padding:30px;position:relative;}
-  .modal-close{position:absolute;top:20px;left:20px;background:#f1f5f9;border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;}
+  .modal-box{background:#fff;border-radius:22px;width:100%;max-width:520px;padding:32px;position:relative;}
+  .modal-close{position:absolute;top:22px;left:22px;background:#f1f5f9;border:none;width:34px;height:34px;border-radius:50%;cursor:pointer;}
 </style>
 </head>
 <body>
 
-<header class="topbar">
-  <div class="brand">
-    <div class="mark">ت</div>
-    <div>
-      <h1>سنتر التفوق التعليمي</h1>
-      <p>لوحة التحكم المركزية - إدارة الطلاب والحضور والمصاريف</p>
-    </div>
-  </div>
-  <div class="conn-status">
-    <span class="dot off" id="connDot"></span>
-    <span id="connText">جاري الاتصال...</span>
-  </div>
-</header>
-
 <main>
+  <header class="topbar">
+    <div class="brand">
+      <div class="mark">ت</div>
+      <div>
+        <h1>سنتر التفوق التعليمي</h1>
+        <p>لوحة التحكم المركزية - إدارة الطلاب والحضور والمصاريف</p>
+      </div>
+    </div>
+    <div class="conn-status">
+      <span class="dot off" id="connDot"></span>
+      <span id="connText">جاري الاتصال...</span>
+    </div>
+  </header>
+
   <section class="stats">
     <div class="stat-card students">
       <div class="icon">👥</div>
@@ -371,15 +377,15 @@
       </div>
     </div>
   </div>
-</main>
 
-<footer>نظام سنتر التفوق التعليمي — مدعوم بقاعدة بيانات Firebase لحظياً</footer>
+  <footer>نظام سنتر التفوق التعليمي — مدعوم بقاعدة بيانات Firebase لحظياً</footer>
+</main>
 
 <div class="modal-overlay" id="editModalOverlay">
   <div class="modal-box">
     <button type="button" class="modal-close" id="editModalClose">✕</button>
     <h3>تعديل بيانات الطالب</h3>
-    <p style="font-size:12px;color:var(--muted);margin-bottom:15px;">كود الطالب: <span id="editCodeLabel" style="font-weight:800;color:var(--indigo);"></span></p>
+    <p style="font-size:12.5px;color:var(--muted);margin-bottom:15px;">كود الطالب: <span id="editCodeLabel" style="font-weight:900;color:var(--indigo);"></span></p>
     <form id="editForm">
       <div class="field">
         <label>اسم الطالب</label>
@@ -407,17 +413,17 @@
         <label>المصاريف (ج.م)</label>
         <input type="number" id="e_fees" required>
       </div>
-      <div style="display:flex;gap:10px;margin-top:20px;">
+      <div style="display:flex;gap:12px;margin-top:20px;">
         <button type="button" class="btn btn-ghost" style="flex:1;" id="editCancelBtn">إلغاء</button>
         <button type="submit" class="btn btn-primary" style="flex:1;">حفظ التغييرات</button>
       </div>
-      <div id="editMsg" style="margin-top:10px;font-size:12px;font-weight:700;"></div>
+      <div id="editMsg" style="margin-top:10px;font-size:13px;font-weight:800;"></div>
     </form>
   </div>
 </div>
 
 <script>
-// إعدادات Firebase الجديدة التي أرسلتها في الصورة
+// إعدادات Firebase الخاصة بك
 const firebaseConfig = {
   apiKey: "AIzaSyD6UDuCBns0_zdWOhnLOX3OtKelHs3hGmc",
   authDomain: "altafawuk-center.firebaseapp.com",
@@ -444,7 +450,6 @@ db.ref('.info/connected').on('value', (snap) => {
   }
 });
 
-const ARABIC_MONTHS = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
 function todayStr() {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
@@ -598,8 +603,8 @@ function renderTable() {
     return `
       <tr data-code="${code}">
         <td><span class="code-pill">${code}</span></td>
-        <td style="font-weight:800;">${s.name}</td>
-        <td><span style="background:var(--indigo-bg);color:var(--indigo-dark);padding:4px 8px;border-radius:6px;font-size:12px;font-weight:700;">${s.gradeLevel || 'غير محدد'}</span></td>
+        <td style="font-weight:900;">${s.name}</td>
+        <td><span style="background:var(--indigo-bg);color:var(--indigo-dark);padding:5px 10px;border-radius:6px;font-size:12.5px;font-weight:800;">${s.gradeLevel || 'غير محدد'}</span></td>
         <td>${s.studentPhone || '—'}</td>
         <td>
           <input type="number" class="cell-input attended-input" value="${s.attendedSessions || 0}" min="0">
@@ -608,7 +613,7 @@ function renderTable() {
         <td><input type="number" class="cell-input grade-input" value="${s.examGrade || 0}" min="0" max="100"></td>
         <td>
           <button class="fee-btn ${s.feesPaid ? 'paid' : 'unpaid'} fee-toggle-btn">${s.feesPaid ? 'تم السداد ✓' : 'لم يسدد'}</button>
-          <span style="font-size:11px;display:block;margin-top:3px;color:var(--muted);">${s.fees || 0} ج.م</span>
+          <span style="font-size:11.5px;display:block;margin-top:3px;color:var(--muted);">${s.fees || 0} ج.م</span>
         </td>
         <td>
           <div class="row-actions">
