@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سنتر التفوق التعليمي - بوابة الطالب</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<style>
+  :root{
+    --bg:#f8fafc; --card:#ffffff; --border-soft:#eef1f6;
+    --indigo:#4f46e5; --indigo-dark:#4338ca; --indigo-bg:#eef2ff;
+    --purple:#7c3aed; --emerald-dark:#059669; --emerald-bg:#ecfdf5;
+    --red:#ef4444; --red-bg:#fef2f2; --text:#0f172a; --muted:#64748b; --muted-2:#94a3b8;
+    --shadow-md:0 4px 10px rgba(15,23,42,.06); --radius-lg:20px; --radius-sm:10px;
+  }
+  *{box-sizing:border-box;}
+  body{background:var(--bg);font-family:'Cairo',sans-serif;color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;margin:0;}
+  .container{width:100%;max-width:500px;background:var(--card);border-radius:var(--radius-lg);border:1px solid var(--border-soft);box-shadow:var(--shadow-md);padding:30px;}
+  .student-header{text-align:center;margin-bottom:25px;}
+  .student-header .avatar{width:70px;height:70px;border-radius:20px;background:linear-gradient(120deg,var(--indigo),var(--purple));color:#fff;font-size:30px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;}
+  .student-header h1{font-size:22px;font-weight:800;margin:0 0 5px;}
+  .grade-badge{display:inline-block;background:var(--indigo-bg);color:var(--indigo-dark);padding:5px 14px;border-radius:20px;font-size:12.5px;font-weight:700;}
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+  .info-box{background:#f8fafc;border:1px solid var(--border-soft);border-radius:var(--radius-sm);padding:14px;text-align:center;}
+  .info-box .label{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:5px;}
+  .info-box .val{font-size:16px;font-weight:800;color:var(--text);}
+  .info-box .val.paid{color:var(--emerald-dark);}
+  .info-box .val.unpaid{color:var(--red);}
+  .status-box{background:#f8fafc;border:1px solid var(--border-soft);border-radius:var(--radius-sm);padding:16px;margin-bottom:20px;text-align:center;}
+  .status-box .title{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:8px;}
+  .progress-bar-bg{width:100%;height:10px;background:#e2e8f0;border-radius:5px;overflow:hidden;margin-bottom:8px;}
+  .progress-bar-fill{height:100%;background:linear-gradient(120deg,var(--indigo),var(--purple));width:0%;transition:width 0.5s ease;}
+  .error-state{text-align:center;color:var(--red);font-weight:700;padding:30px;}
+  footer{text-align:center;color:var(--muted-2);font-size:12px;margin-top:20px;font-weight:600;}
+</style>
+</head>
+<body>
+
+<div class="container" id="mainContainer">
+  <div class="student-header">
+    <div class="avatar" id="avatarLetter">ط</div>
+    <h1 id="studentName">جاري التحميل...</h1>
+    <div class="grade-badge" id="studentGrade">--</div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-box">
+      <div class="label">كود الطالب</div>
+      <div class="val" id="studentCode">--</div>
+    </div>
+    <div class="info-box">
+      <div class="label">حالة المصاريف</div>
+      <div class="val" id="studentFees">--</div>
+    </div>
+  </div>
+
+  <div class="status-box">
+    <div class="title">حضور الحصص خلال الشهر</div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+    <div style="font-size:13px;font-weight:800;color:var(--indigo-dark);" id="attendanceText">حضر 0 من 0 حصة</div>
+  </div>
+
+  <div class="info-box" style="width:100%;">
+    <div class="label">درجة آخر امتحان</div>
+    <div class="val" id="studentExam" style="font-size:22px;color:var(--purple);">0 / 100</div>
+  </div>
+</div>
+
+<footer>سنتر التفوق التعليمي — بوابة متابعة الطالب</footer>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyD6UDuCBns0_zdWOhnLOX3OtKelHs3hGmc",
+  authDomain: "altafawuk-center.firebaseapp.com",
+  databaseURL: "https://altafawuk-center-default-rtdb.firebaseio.com",
+  projectId: "altafawuk-center",
+  storageBucket: "altafawuk-center.firebasestorage.app",
+  messagingSenderId: "499180495752",
+  appId: "1:499180495752:web:b48e6d3b2d0a7f6cc103d",
+  measurementId: "G-69RJ1X96WM"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+
+if (!code) {
+  document.getElementById('mainContainer').innerHTML = '<div class="error-state">عذراً، لم يتم تحديد كود الطالب في الرابط.</div>';
+} else {
+  db.ref('students/' + code).once('value').then(snap => {
+    if (!snap.exists()) {
+      document.getElementById('mainContainer').innerHTML = '<div class="error-state">عذراً، هذا الطالب غير مسجل في قاعدة البيانات.</div>';
+      return;
+    }
+    const s = snap.val();
+    
+    document.getElementById('studentName').textContent = s.name || 'بدون اسم';
+    document.getElementById('avatarLetter').textContent = (s.name || 'ط').charAt(0);
+    document.getElementById('studentGrade').textContent = s.gradeLevel || 'غير محدد';
+    document.getElementById('studentCode').textContent = code;
+    
+    const feesEl = document.getElementById('studentFees');
+    if (s.feesPaid) {
+      feesEl.textContent = 'تم السداد ✓';
+      feesEl.className = 'val paid';
+    } else {
+      feesEl.textContent = 'لم يسدد ✗';
+      feesEl.className = 'val unpaid';
+    }
+
+    const attended = Number(s.attendedSessions) || 0;
+    const total = Number(s.totalSessions) || 1;
+    const percentage = Math.min(Math.round((attended / total) * 100), 100);
+    
+    document.getElementById('progressBar').style.width = percentage + '%';
+    document.getElementById('attendanceText').textContent = `حضر ${attended} من ${total} حصة (${percentage}%)`;
+    
+    document.getElementById('studentExam').textContent = (s.examGrade || 0) + ' / 100';
+  }).catch(err => {
+    document.getElementById('mainContainer').innerHTML = '<div class="error-state">حدث خطأ أثناء الاتصال بقاعدة البيانات.</div>';
+  });
+}
+</script>
+</body>
+</html>
